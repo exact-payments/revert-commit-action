@@ -11,9 +11,9 @@ echo "::set-output name=start-time::$START_TIME"
 #-----------------------------------------------------------------------
 # Collecting necessary environment/input variables from the Github execution environment
 #-----------------------------------------------------------------------
-CURRENT_GIT_BRANCH=${GITHUB_REF#refs/head/}
-echo "Current version: 0.0.7"
-echo $CURRENT_GIT_BRANCH
+# CURRENT_GIT_BRANCH=$(git branch --show-current)
+echo "Current version: 0.0.8"
+# echo $CURRENT_GIT_BRANCH
 
 if [[ -z "$GITHUB_SHA" ]]; then
 	echo "GITHUB_SHA env variable must be set but was not."
@@ -41,8 +41,9 @@ set -o xtrace
 
 # Checkout the repository code for the given relevant branch
 # TODO | Potentially consider requiring the actions/checkoutv2 as a pre-requisite
-git fetch origin $CURRENT_GIT_BRANCH
-git checkout -b $CURRENT_GIT_BRANCH origin/$CURRENT_GIT_BRANCH
+# git fetch origin $CURRENT_GIT_BRANCH
+# git checkout -b $CURRENT_GIT_BRANCH origin/$CURRENT_GIT_BRANCH
+git branch --show-current
 
 # Check that the commit exists
 git cat-file -t $GITHUB_SHA
