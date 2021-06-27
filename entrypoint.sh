@@ -42,8 +42,11 @@ CURRENT_GIT_BRANCH=$(git branch --show-current)
 git cat-file -t $GITHUB_SHA
 
 # Revert and push the commit
+git status
 git revert $GITHUB_SHA --no-edit
 git log -n 3 --oneline
 git diff origin/$CURRENT_GIT_BRANCH --name-only
+git diff HEAD~2 --name-only
+
 echo "Reverting commit [$GITHUB_SHA] on current Git branch [$CURRENT_GIT_BRANCH]"
 # git push origin $CURRENT_GIT_BRANCH
