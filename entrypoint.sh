@@ -58,5 +58,12 @@ echo "-----------------------------------------------------"
 git diff $GITHUB_SHA~1 --name-only | cat
 echo "-----------------------------------------------------"
 
-echo "Reverting commit [$GITHUB_SHA] on current Git branch [$CURRENT_GIT_BRANCH]"
-# git push origin $CURRENT_GIT_BRANCH
+echo "About to revert commit [$GITHUB_SHA] on current Git branch [$CURRENT_GIT_BRANCH]"
+
+if [ "$IS_PUSH_ENABLED" == 'true' ]
+then
+	echo "Executing push since push is ENABLED via Github Action inputs"
+	git push origin $CURRENT_GIT_BRANCH
+else
+	echo "Bypassing push since push is DISABLED via Github Action inputs"
+fi

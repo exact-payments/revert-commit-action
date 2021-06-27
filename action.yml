@@ -5,6 +5,10 @@ inputs:
   github-token:
     description: 'Github Action generated secret token for authentication purposes'
     required: true
+  is-push-enabled:
+    description: 'Parameter to enable or disable the push of the revert (defaulting to false for safety/testing).'
+    required: true
+    default: 'false'
 outputs:
   start-time:
     description: 'The time the github action started'
@@ -16,3 +20,4 @@ runs:
   image: 'Dockerfile'
   env:
     GITHUB_TOKEN: ${{ inputs.github-token }}
+    IS_PUSH_ENABLED: ${{ inputs.is-push-enabled }}
