@@ -11,10 +11,6 @@ echo "::set-output name=start-time::$START_TIME"
 #-----------------------------------------------------------------------
 # Collecting necessary environment/input variables from the Github execution environment
 #-----------------------------------------------------------------------
-# CURRENT_GIT_BRANCH=$(git branch --show-current)
-echo "Current version: 0.0.8"
-# echo $CURRENT_GIT_BRANCH
-
 if [[ -z "$GITHUB_SHA" ]]; then
 	echo "GITHUB_SHA env variable must be set but was not."
 	exit 1
@@ -39,13 +35,13 @@ git config --global user.name "GitHub Revert Commit Action"
 
 set -o xtrace
 
-# Checkout the repository code for the given relevant branch
-# TODO | Potentially consider requiring the actions/checkoutv2 as a pre-requisite
-# git fetch origin $CURRENT_GIT_BRANCH
-# git checkout -b $CURRENT_GIT_BRANCH origin/$CURRENT_GIT_BRANCH
-git branch --show-current
+# Get the current branch so we know which branch to push the revert to.
+CURRENT_GIT_BRANCH=$(git branch --show-current)
 
 # Check that the commit exists
 git cat-file -t $GITHUB_SHA
+
+# Revert and push the commit
 git revert $GITHUB_SHA --no-edit
-# git push origin $GIT_BRANCH
+echo "Reverting commit [$GITHUB_SHA] on current Git branch [$CURRENT_GIT_BRANCH]"
+git push origin $CURRENT_GIT_BRANCH
