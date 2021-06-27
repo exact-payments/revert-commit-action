@@ -31,4 +31,6 @@ The time this action started
   uses: tofu-apis/revert-commit-action@v0.0.9
   with:
     github-token: $${{ secrets.GITHUB_TOKEN }}
+    # Make sure to test with false or without this parameter first to be safe!
+    is-push-enabled: 'true'
 ```
