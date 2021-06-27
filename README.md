@@ -4,6 +4,10 @@ This action reverts the given commit in the Github Action Workflow
 
 ## Inputs
 
+## `github-token`
+
+**Required** Github Action generated secret token for authentication purposes
+
 ## `git-branch`
 
 **Required** The name of the git branch to revert commit from.
@@ -18,4 +22,6 @@ The time this action started
 ```
 - name: Revert Commit
   uses: tofu-apis/revert-commit-action@v0.0.1
+  with:
+    github-token: $${{ secrets.GITHUB_TOKEN }}
 ```

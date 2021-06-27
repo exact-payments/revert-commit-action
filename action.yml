@@ -1,7 +1,10 @@
 # action.yml
 name: 'Revert Commit Action'
 description: 'Automatically revert a given commit'
-# inputs:
+inputs:
+  github-token:
+    description: 'Github Action generated secret token for authentication purposes'
+    required: true
   # git-branch: # Git branch
   #   description: 'The name of the git branch to revert commit from.'
   #   required: true

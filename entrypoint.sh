@@ -34,6 +34,8 @@ fi
 echo $GITHUB_SHA
 echo $GITHUB_REPOSITORY
 echo $GITHUB_REF
+echo $GITHUB_HEAD_REF
+echo $GITHUB_BASE_RED
 
 #-----------------------------------------------------------------------
 # Push the revert commit to the Git repository
