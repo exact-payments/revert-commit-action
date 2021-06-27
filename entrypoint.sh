@@ -42,11 +42,21 @@ CURRENT_GIT_BRANCH=$(git branch --show-current)
 git cat-file -t $GITHUB_SHA
 
 # Revert and push the commit
-git status
 git revert $GITHUB_SHA --no-edit
-git log -n 3 --oneline
 git diff origin/$CURRENT_GIT_BRANCH --name-only
-git diff HEAD~2 --name-only
+
+# Sanity check for debugging to see what files changed
+echo "Outputting the files that have changed in the revert."
+echo "These files should match the files modified in the commit."
+echo "-----------------------------------------------------"
+echo $(git diff $GITHUB_SHA --name-only)
+echo "-----------------------------------------------------"
+
+echo "Outputting the files that have changed across the"
+echo "revert and incoming commit. This should be empty!"
+echo "-----------------------------------------------------"
+echo $(git diff $GITHUB_SHA~1 --name-only)
+echo "-----------------------------------------------------"
 
 echo "Reverting commit [$GITHUB_SHA] on current Git branch [$CURRENT_GIT_BRANCH]"
 # git push origin $CURRENT_GIT_BRANCH
