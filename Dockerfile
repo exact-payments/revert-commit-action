@@ -1,6 +1,6 @@
 # Set the base image to ubuntu
 # https://hub.docker.com/_/ubuntu
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 RUN apt-get -qq update \
     && apt-get install -qq -y \
