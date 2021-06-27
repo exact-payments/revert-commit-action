@@ -6,7 +6,7 @@ This action reverts the given commit in the Github Action Workflow
 
 ## `git-branch`
 
-**Required** The given commit's short hash to be reverted.
+**Required** The name of the git branch to revert commit from.
 
 ## Outputs
 
