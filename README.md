@@ -22,7 +22,7 @@ The time this action started
 ```
 - uses: actions/checkout@v2
 - name: Revert Commit
-  uses: tofu-apis/revert-commit-action@v0.0.1
+  uses: tofu-apis/revert-commit-action@v0.0.6
   with:
     github-token: $${{ secrets.GITHUB_TOKEN }}
 ```

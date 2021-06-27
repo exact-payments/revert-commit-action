@@ -12,6 +12,7 @@ echo "::set-output name=start-time::$START_TIME"
 # Collecting necessary environment/input variables from the Github execution environment
 #-----------------------------------------------------------------------
 CURRENT_GIT_BRANCH=${GITHUB_REF#refs/head/}
+echo "Current version: 0.0.6"
 echo $CURRENT_GIT_BRANCH
 
 if [[ -z "$GITHUB_SHA" ]]; then
