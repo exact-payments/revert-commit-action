@@ -49,13 +49,13 @@ git diff origin/$CURRENT_GIT_BRANCH --name-only
 echo "Outputting the files that have changed in the revert."
 echo "These files should match the files modified in the commit."
 echo "-----------------------------------------------------"
-echo $(git diff $GITHUB_SHA --name-only)
+git diff $GITHUB_SHA --name-only | cat
 echo "-----------------------------------------------------"
 
 echo "Outputting the files that have changed across the"
 echo "revert and incoming commit. This should be empty!"
 echo "-----------------------------------------------------"
-echo $(git diff $GITHUB_SHA~1 --name-only)
+git diff $GITHUB_SHA~1 --name-only | cat
 echo "-----------------------------------------------------"
 
 echo "Reverting commit [$GITHUB_SHA] on current Git branch [$CURRENT_GIT_BRANCH]"
