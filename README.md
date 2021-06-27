@@ -20,6 +20,7 @@ The time this action started
 
 ## Example usage
 ```
+- uses: actions/checkout@v2
 - name: Revert Commit
   uses: tofu-apis/revert-commit-action@v0.0.1
   with:

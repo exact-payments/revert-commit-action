@@ -11,10 +11,8 @@ echo "::set-output name=start-time::$START_TIME"
 #-----------------------------------------------------------------------
 # Collecting necessary environment/input variables from the Github execution environment
 #-----------------------------------------------------------------------
-echo "Outputting GITHUB_EVENT_PATH file for debugging purposes..."
-cat $GITHUB_EVENT_PATH
-
-GIT_BRANCH=main
+CURRENT_GIT_BRANCH=${GITHUB_REF#refs/head/}
+echo $CURRENT_GIT_BRANCH
 
 if [[ -z "$GITHUB_SHA" ]]; then
 	echo "GITHUB_SHA env variable must be set but was not."
@@ -31,12 +29,6 @@ if [[ -z "$GITHUB_TOKEN" ]]; then
 	exit 1
 fi
 
-echo $GITHUB_SHA
-echo $GITHUB_REPOSITORY
-echo $GITHUB_REF
-echo $GITHUB_HEAD_REF
-echo $GITHUB_BASE_RED
-
 #-----------------------------------------------------------------------
 # Push the revert commit to the Git repository
 #-----------------------------------------------------------------------
@@ -48,8 +40,8 @@ set -o xtrace
 
 # Checkout the repository code for the given relevant branch
 # TODO | Potentially consider requiring the actions/checkoutv2 as a pre-requisite
-git fetch origin $GIT_BRANCH
-git checkout -b $GIT_BRANCH origin/$GIT_BRANCH
+git fetch origin $CURRENT_GIT_BRANCH
+git checkout -b $CURRENT_GIT_BRANCH origin/$CURRENT_GIT_BRANCH
 
 # Check that the commit exists
 git cat-file -t $GITHUB_SHA
