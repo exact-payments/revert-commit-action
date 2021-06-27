@@ -1,11 +1,11 @@
 # action.yml
 name: 'Revert Commit Action'
 description: 'Automatically revert a given commit'
-inputs:
-    # git-branch: # Git branch
-    #   description: 'The name of the git branch to revert commit from.'
-    #   required: true
-    #   default: 'main'
+# inputs:
+  # git-branch: # Git branch
+  #   description: 'The name of the git branch to revert commit from.'
+  #   required: true
+  #   default: 'main'
 outputs:
   start-time:
     description: 'The time the github action started'
