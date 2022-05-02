@@ -28,6 +28,9 @@ fi
 
 echo "Running entrypoint.sh script"
 
+# Output current git version for debugging
+git --version
+
 #-----------------------------------------------------------------------
 # Push the revert commit to the Git repository
 #-----------------------------------------------------------------------
