@@ -34,18 +34,20 @@ git --version
 #-----------------------------------------------------------------------
 # Push the revert commit to the Git repository
 #-----------------------------------------------------------------------
+echo "Setting git configs for safe directory."
+
+# Workaround for Git Security Vulnerability https://github.com/actions/checkout/issues/760
+git config --global --add safe.directory $GITHUB_WORKSPACE
+git config --global --add safe.directory /github/workspace
+
+echo "Setting git config for remote URL."
+
 git remote set-url origin https://x-access-token:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git
 
 echo "Setting git configs for email / name."
 
 git config --global user.email "revert-commit@tofuapi.com"
 git config --global user.name "GitHub Revert Commit Action"
-
-echo "Setting git configs for safe directory."
-
-# Workaround for Git Security Vulnerability https://github.com/actions/checkout/issues/760
-git config --global --add safe.directory $GITHUB_WORKSPACE
-git config --global --add safe.directory /github/workspace
 
 echo "Finished setting up git configurations."
 echo "$GITHUB_WORKSPACE"
