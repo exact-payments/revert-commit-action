@@ -39,6 +39,10 @@ git config --global user.name "GitHub Revert Commit Action"
 git config --global --add safe.directory $GITHUB_WORKSPACE
 git config --global --add safe.directory /github/workspace
 
+echo "Finished setting up git configurations."
+echo "$GITHUB_WORKSPACE"
+echo $GITHUB_WORKSPACE
+
 set -o xtrace
 
 # Get the current branch so we know which branch to push the revert to.
