@@ -33,6 +33,9 @@ git remote set-url origin https://x-access-token:$GITHUB_TOKEN@github.com/$GITHU
 git config --global user.email "revert-commit@github.com"
 git config --global user.name "GitHub Revert Commit Action"
 
+# Workaround for https://github.com/actions/checkout/issues/760
+git config --global safe.directory "$GITHUB_WORKSPACE"
+
 set -o xtrace
 
 # Get the current branch so we know which branch to push the revert to.
