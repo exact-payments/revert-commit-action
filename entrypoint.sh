@@ -26,12 +26,18 @@ if [[ -z "$GITHUB_TOKEN" ]]; then
 	exit 1
 fi
 
+echo "Running entrypoint.sh script"
+
 #-----------------------------------------------------------------------
 # Push the revert commit to the Git repository
 #-----------------------------------------------------------------------
 git remote set-url origin https://x-access-token:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git
 git config --global user.email "revert-commit@github.com"
 git config --global user.name "GitHub Revert Commit Action"
+
+# Workaround for Git Security Vulnerability https://github.com/actions/checkout/issues/760
+git config --global --add safe.directory $GITHUB_WORKSPACE
+git config --global --add safe.directory /github/workspace
 
 set -o xtrace
 
