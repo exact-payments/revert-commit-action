@@ -11,6 +11,7 @@ RUN apt-get -qq update \
 COPY entrypoint.sh /entrypoint.sh
 
 # Workaround permissions issue: https://github.com/actions/checkout/issues/760
+RUN git config --global --add safe.directory "$GITHUB_WORKSPACE"
 RUN git config --global --add safe.directory /github/workspace
 
 # Code file to execute when the docker container starts up (`entrypoint.sh`)
