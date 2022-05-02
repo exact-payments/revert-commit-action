@@ -50,8 +50,6 @@ git config --global user.email "revert-commit@tofuapi.com"
 git config --global user.name "GitHub Revert Commit Action"
 
 echo "Finished setting up git configurations."
-echo "$GITHUB_WORKSPACE"
-echo $GITHUB_WORKSPACE
 
 set -o xtrace
 
