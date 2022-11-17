@@ -58,7 +58,9 @@ runs:
     - name: Outputting diff of revert commit
       if: ${{ inputs.should-log-diff == 'true' }}
       # Comparing against branch minus one commit since the last commit should be the revert commit.
-      run: git diff ${{ github.ref_name }}~1 --name-only
+      run: |
+        git config --global pager.diff false
+        git diff ${{ github.ref_name }}~1
       shell: bash
     - name: Automatic commit push to repo
       if: ${{ inputs.is-push-enabled == 'true' }}
