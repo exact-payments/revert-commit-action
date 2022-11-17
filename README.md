@@ -43,7 +43,7 @@ The commit hash of the commit that was reverted.
     if: always() && (needs.tests.result == 'failure')
     steps:
       - name: Automatic Commit Revert
-        uses: 'tofu-apis/revert-commit-action@v0.0.36'
+        uses: 'tofu-apis/revert-commit-action@v0.0.37'
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           is-push-enabled: 'true'

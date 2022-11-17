@@ -73,6 +73,7 @@ runs:
         # This is effectively a no-op but is needed for git-auto-commit-action
         # to force push the existing local commit that we have just created.
         commit_options: '--amend --no-edit'
+        skip_dirty_check: true
         commit_user_name: ${{ inputs.commit-username }}
         commit_user_email: ${{ inputs.commit-email }}
     - name: Set commit hash outputs
