@@ -4,33 +4,47 @@ This action reverts the given commit in the Github Action Workflow
 
 ## Inputs
 
+## `commit-username`
+
+**Optional** Username to execute commits to Github with
+
+## `commit-email`
+
+**Optional** Email to execute commits to Github with
+
 ## `github-token`
 
 **Required** Github Action generated secret token for authentication purposes
 
+## `is-push-enabled`
+
+**Required** Parameter to enable or disable the push of the revert (defaulting to false for safety/testing).
+
+## `should-log-diff`
+
+**Optional** Boolean: true if git diff should be logged, false otherwise
+
 ## Outputs
 
-## `start-time`
+## `was-commit-reverted`
 
-The time this action started
+Boolean: true if commit was revert, false otherwise.
+
+## `reverted-commit-hash`
+
+The commit hash of the commit that was reverted.
 
 ## Example usage
 ```
-- uses: actions/checkout@v2
-  with:
-    # Use 0 to ensure we get the full history for all branches/tags
-    # █     ██  █████  ██████  ███    ██ ██ ███    ██  ██████  ██ ██ ██ 
-    # ██     ██ ██   ██ ██   ██ ████   ██ ██ ████   ██ ██       ██ ██ ██ 
-    # ██  █  ██ ███████ ██████  ██ ██  ██ ██ ██ ██  ██ ██   ███ ██ ██ ██ 
-    # ██ ███ ██ ██   ██ ██   ██ ██  ██ ██ ██ ██  ██ ██ ██    ██          
-    #  ███ ███  ██   ██ ██   ██ ██   ████ ██ ██   ████  ██████  ██ ██ ██
-    # IMPORTANT: Without this, the git revert will delete ALL files!
-    # Make sure to add the fetch depth and set it to 0!
-    fetch-depth: 0
-- name: Revert Commit
-  uses: tofu-apis/revert-commit-action@v0.0.9
-  with:
-    github-token: $${{ secrets.GITHUB_TOKEN }}
-    # Make sure to test with false or without this parameter first to be safe!
-    is-push-enabled: 'true'
+  # Revert commit (only should run on failure of some phase in a CI/CD pipeline)
+  auto-revert-commit:
+    needs: tests
+    runs-on: ubuntu-latest
+    if: always() && (needs.tests.result == 'failure')
+    steps:
+      - name: Automatic Commit Revert
+        uses: 'tofu-apis/revert-commit-action@v0.0.27'
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          is-push-enabled: 'true'
 ```
