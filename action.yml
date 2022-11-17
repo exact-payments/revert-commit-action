@@ -51,6 +51,8 @@ runs:
     - name: Create Local Revert Commit
       run: |
         echo "Locally reverting commit with hash: [${{ github.sha }}]"
+        git config --global user.email "${{ inputs.commit-email }}"
+        git config --global user.name "${{ inputs.commit-username }}"
         git revert ${{ github.sha }} --no-edit
       shell: bash
     - name: Outputting diff of revert commit
