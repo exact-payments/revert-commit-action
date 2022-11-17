@@ -24,11 +24,9 @@ outputs:
   was-commit-reverted:
     description: 'Boolean: true if commit was revert, false otherwise.'
     value: ${{ steps.set-commit-hash-outputs.outputs.was-commit-reverted }}
-    type: string
   reverted-commit-hash:
     description: 'The commit hash of the commit that was reverted.'
     value: ${{ steps.set-commit-hash-outputs.outputs.reverted-commit-hash }}
-    type: string
 branding:
     icon: 'rewind'
     color: 'red'
