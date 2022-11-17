@@ -68,6 +68,11 @@ runs:
       uses: stefanzweifel/git-auto-commit-action@v4
       with:
         commit_message: Automatic Revert Commit for Commit Hash [${{ github.sha }}]
+        # Use amend with no edit but don't force since we know we generated a
+        # new auto revert commit that hasn't been submitted to the repo yet.
+        # This is effectively a no-op but is needed for git-auto-commit-action
+        # to force push the existing local commit that we have just created.
+        commit_options: '--amend --no-edit'
         commit_user_name: ${{ inputs.commit-username }}
         commit_user_email: ${{ inputs.commit-email }}
     - name: Set commit hash outputs
