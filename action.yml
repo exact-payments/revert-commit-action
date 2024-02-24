@@ -67,7 +67,7 @@ runs:
       id: revert-commit-push
       uses: stefanzweifel/git-auto-commit-action@v4
       with:
-        commit_message: Automatic Revert Commit for Commit Hash [${{ github.sha }}]
+        commit_message: Automatic Revert Commit for Commit Hash [${{ github.sha }}] [skip ci]
         # Use amend with no edit but don't force since we know we generated a
         # new auto revert commit that hasn't been submitted to the repo yet.
         # This is effectively a no-op but is needed for git-auto-commit-action
